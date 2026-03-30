@@ -655,7 +655,7 @@ input, select, textarea { font-family: inherit; }
 @media (max-width: 768px) {
   .form-container {
     padding: var(--space-4) var(--space-4) 100px;
-    gap: var(--space-4);
+    gap: var(--space-8);
   }
 
   .fields-grid--2 {
