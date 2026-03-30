@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fiche d'Achat</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-sans/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/geist@1.3.1/dist/fonts/geist-mono/style.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ============================================================ -->
+  <!-- INTERFACE ÉCRAN (masquée à l'impression)                      -->
+  <!-- ============================================================ -->
+
+  <!-- Barre de navigation -->
+  <nav class="app-nav screen-only">
+    <div class="app-nav__inner">
+      <div class="app-nav__brand">
+        <!-- Déposez votre logo (logo.png) dans le même dossier que index.html -->
+        <img src="logo.png" alt="Logo entreprise" class="app-nav__logo" id="nav-logo"
+             onerror="this.style.display='none'">
+        <span class="app-nav__title">Fiche d'Achat</span>
+      </div>
+      <div class="app-nav__actions">
+        <button type="button" class="btn btn--secondary btn--sm" id="btn-reset-nav">
+          <i data-lucide="rotate-ccw" aria-hidden="true"></i>
+          Réinitialiser
+        </button>
+        <button type="button" class="btn btn--primary btn--sm" id="btn-export-nav">
+          <i data-lucide="file-down" aria-hidden="true"></i>
+          Exporter en PDF
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Formulaire principal -->
+  <main class="form-container screen-only" id="main-form">
+
+    <!-- ── Section 0 : Méta-document ─────────────────────────── -->
+    <section class="form-section card" id="section-meta">
+      <div class="section-header">
+        <p class="section-label">Document</p>
+        <h2 class="section-title">Identifiant de la demande</h2>
+      </div>
+      <div class="fields-grid fields-grid--2">
+        <div class="field">
+          <label class="field__label" for="doc-ref">
+            N° de demande <span class="field__required" aria-hidden="true">*</span>
+          </label>
+          <input class="field__input" type="text" id="doc-ref" name="doc-ref"
+                 autocomplete="off" spellcheck="false">
+          <p class="field__error" id="error-doc-ref" role="alert" hidden></p>
+        </div>
+        <div class="field">
+          <label class="field__label" for="doc-date">
+            Date de la demande <span class="field__required" aria-hidden="true">*</span>
+          </label>
+          <input class="field__input" type="date" id="doc-date" name="doc-date">
+          <p class="field__error" id="error-doc-date" role="alert" hidden></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Section 1 : Demandeur ──────────────────────────────── -->
+    <section class="form-section card" id="section-demandeur">
+      <div class="section-header">
+        <p class="section-label">Demandeur</p>
+        <h2 class="section-title">Informations du demandeur</h2>
+      </div>
+      <div class="fields-grid fields-grid--2">
+        <div class="field">
+          <label class="field__label" for="dem-nom">
+            Prénom et Nom <span class="field__required" aria-hidden="true">*</span>
+          </label>
+          <input class="field__input" type="text" id="dem-nom" name="dem-nom"
+                 placeholder="Jean Dupont" autocomplete="name">
+          <p class="field__error" id="error-dem-nom" role="alert" hidden></p>
+        </div>
+        <div class="field">
+          <label class="field__label" for="dem-service">
+            Service / Département <span class="field__required" aria-hidden="true">*</span>
+          </label>
+          <select class="field__input field__select" id="dem-service" name="dem-service">
+            <option value="">— Sélectionner —</option>
+          </select>
+          <p class="field__error" id="error-dem-service" role="alert" hidden></p>
+        </div>
+        <div class="field">
+          <label class="field__label" for="dem-poste">Poste / Fonction</label>
+          <input class="field__input" type="text" id="dem-poste" name="dem-poste"
+                 placeholder="Responsable achats">
+        </div>
+        <div class="field">
+          <label class="field__label" for="dem-email">Email</label>
+          <input class="field__input" type="email" id="dem-email" name="dem-email"
+                 placeholder="jean.dupont@entreprise.fr" autocomplete="email">
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Section 2 : Fournisseur ────────────────────────────── -->
+    <section class="form-section card" id="section-fournisseur">
+      <div class="section-header">
+        <p class="section-label">Fournisseur</p>
+        <h2 class="section-title">Informations fournisseur</h2>
+      </div>
+      <div class="fields-grid fields-grid--2">
+        <div class="field">
+          <label class="field__label" for="fou-nom">
+            Nom du fournisseur <span class="field__required" aria-hidden="true">*</span>
+          </label>
+          <input class="field__input" type="text" id="fou-nom" name="fou-nom"
+                 placeholder="Société XYZ">
+          <p class="field__error" id="error-fou-nom" role="alert" hidden></p>
+        </div>
+        <div class="field">
+          <label class="field__label" for="fou-contact">Interlocuteur / Contact</label>
+          <input class="field__input" type="text" id="fou-contact" name="fou-contact"
+                 placeholder="Marie Martin">
+        </div>
+        <div class="field">
+          <label class="field__label" for="fou-email">Email</label>
+          <input class="field__input" type="email" id="fou-email" name="fou-email"
+                 placeholder="contact@xyz.fr">
+        </div>
+        <div class="field">
+          <label class="field__label" for="fou-tel">Téléphone</label>
+          <input class="field__input" type="tel" id="fou-tel" name="fou-tel"
+                 placeholder="01 23 45 67 89">
+        </div>
+        <div class="field field--full">
+          <label class="field__label" for="fou-adresse">Adresse</label>
+          <textarea class="field__input field__textarea" id="fou-adresse" name="fou-adresse"
+                    rows="2" placeholder="12 rue de la Paix, 75001 Paris"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Section 3 : Détail commande ───────────────────────── -->
+    <section class="form-section card" id="section-commande">
+      <div class="section-header">
+        <p class="section-label">Commande</p>
+        <h2 class="section-title">Détail des articles</h2>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="items-table" id="items-table">
+          <thead>
+            <tr>
+              <th class="col-num">#</th>
+              <th class="col-designation">
+                Désignation <span class="field__required" aria-hidden="true">*</span>
+              </th>
+              <th class="col-ref">Référence</th>
+              <th class="col-qty">
+                Qté <span class="field__required" aria-hidden="true">*</span>
+              </th>
+              <th class="col-unit">Unité</th>
+              <th class="col-pu">
+                Prix unit. HT <span class="field__required" aria-hidden="true">*</span>
+              </th>
+              <th class="col-tva">TVA %</th>
+              <th class="col-ttc">Montant TTC</th>
+              <th class="col-del"><span class="sr-only">Supprimer</span></th>
+            </tr>
+          </thead>
+          <tbody id="items-body">
+            <!-- Lignes générées par app.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <p class="field__error" id="error-items" role="alert" hidden></p>
+
+      <button type="button" class="btn btn--secondary btn--sm btn-add-row" id="btn-add-row">
+        <i data-lucide="plus" aria-hidden="true"></i>
+        Ajouter une ligne
+      </button>
+
+      <div class="totals-summary">
+        <div class="totals-row">
+          <span class="totals-label">Total HT</span>
+          <span class="totals-value" id="total-ht">0,00 €</span>
+        </div>
+        <div class="totals-row">
+          <span class="totals-label">Total TVA</span>
+          <span class="totals-value" id="total-tva">0,00 €</span>
+        </div>
+        <div class="totals-row totals-row--main">
+          <span class="totals-label">Total TTC</span>
+          <span class="totals-value totals-value--main" id="total-ttc">0,00 €</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Section 4 : Justification ─────────────────────────── -->
+    <section class="form-section card" id="section-notes">
+      <div class="section-header">
+        <p class="section-label">Justification</p>
+        <h2 class="section-title">Motif et informations complémentaires</h2>
+      </div>
+      <div class="fields-grid fields-grid--1">
+        <div class="field">
+          <label class="field__label" for="motif">
+            Motif de l'achat <span class="field__required" aria-hidden="true">*</span>
+          </label>
+          <textarea class="field__input field__textarea" id="motif" name="motif" rows="4"
+                    placeholder="Décrivez précisément la raison de cet achat et son utilité pour l'entreprise…"></textarea>
+          <p class="field__error" id="error-motif" role="alert" hidden></p>
+        </div>
+      </div>
+      <div class="fields-grid fields-grid--2">
+        <div class="field">
+          <label class="field__label" for="delai">Délai de livraison souhaité</label>
+          <input class="field__input" type="date" id="delai" name="delai">
+        </div>
+        <div class="field">
+          <label class="field__label" for="centre-cout">Centre de coût / Code budgétaire</label>
+          <input class="field__input" type="text" id="centre-cout" name="centre-cout"
+                 placeholder="CC-2026-001">
+        </div>
+        <div class="field field--full">
+          <label class="field__label" for="observations">Observations complémentaires</label>
+          <textarea class="field__input field__textarea" id="observations" name="observations"
+                    rows="3" placeholder="Toute information utile pour le traitement de cette demande…"></textarea>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Section 5 : Zones de validation ───────────────────── -->
+    <section class="form-section card" id="section-validation">
+      <div class="section-header">
+        <p class="section-label">Validation</p>
+        <h2 class="section-title">Zones de signature</h2>
+        <p class="section-hint">Ces zones apparaîtront sur le PDF pour les signatures manuscrites.</p>
+      </div>
+      <div class="validation-grid">
+        <div class="validation-zone">
+          <p class="validation-zone__role">Demandeur</p>
+          <div class="validation-zone__info">
+            <div class="validation-zone__row">
+              <span class="validation-zone__key">Nom</span>
+              <span class="validation-zone__val" id="val-dem-nom">—</span>
+            </div>
+            <div class="validation-zone__row">
+              <span class="validation-zone__key">Date</span>
+              <span class="validation-zone__val" id="val-dem-date">—</span>
+            </div>
+          </div>
+          <div class="validation-zone__sig" aria-hidden="true">
+            <span class="validation-zone__sig-label">Signature</span>
+          </div>
+        </div>
+        <div class="validation-zone">
+          <p class="validation-zone__role">Responsable / Validation</p>
+          <div class="validation-zone__info">
+            <div class="validation-zone__row">
+              <span class="validation-zone__key">Nom</span>
+              <span class="validation-zone__val">—</span>
+            </div>
+            <div class="validation-zone__row">
+              <span class="validation-zone__key">Date</span>
+              <span class="validation-zone__val">—</span>
+            </div>
+          </div>
+          <div class="validation-zone__sig" aria-hidden="true">
+            <span class="validation-zone__sig-label">Signature</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Barre d'actions fixe en bas -->
+  <div class="form-actions screen-only" id="form-actions-bar">
+    <div class="form-actions__inner">
+      <div class="form-actions__status" id="form-error-banner" hidden>
+        <i data-lucide="alert-circle" aria-hidden="true"></i>
+        <span id="form-error-msg"></span>
+      </div>
+      <div class="form-actions__btns">
+        <button type="button" class="btn btn--secondary" id="btn-reset">
+          <i data-lucide="rotate-ccw" aria-hidden="true"></i>
+          Réinitialiser
+        </button>
+        <button type="button" class="btn btn--primary" id="btn-export">
+          <i data-lucide="file-down" aria-hidden="true"></i>
+          Exporter en PDF
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================================================ -->
+  <!-- GABARIT D'IMPRESSION (invisible à l'écran, visible au print) -->
+  <!-- ============================================================ -->
+  <div id="print-template" class="print-only" aria-hidden="true">
+
+    <!-- En-tête -->
+    <div class="pt-header">
+      <div class="pt-header__logo">
+        <!-- Même image que dans la nav — le JS gère le fallback -->
+        <img src="logo.png" alt="" class="pt-logo" id="pt-logo"
+             onerror="this.style.display='none'; document.getElementById('pt-company-fallback').style.display='block'">
+        <span class="pt-company-fallback" id="pt-company-fallback" style="display:none"></span>
+      </div>
+      <div class="pt-header__center">
+        <h1 class="pt-title">FICHE D'ACHAT</h1>
+      </div>
+      <div class="pt-header__meta">
+        <div class="pt-meta-row">
+          <span class="pt-meta-key">N° de demande</span>
+          <span class="pt-meta-val" id="pt-ref">—</span>
+        </div>
+        <div class="pt-meta-row">
+          <span class="pt-meta-key">Date</span>
+          <span class="pt-meta-val" id="pt-date">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bloc info Demandeur / Fournisseur -->
+    <div class="pt-info-grid">
+      <div class="pt-info-box">
+        <p class="pt-box-label">DEMANDEUR</p>
+        <table class="pt-kv-table">
+          <tr><td class="pt-kv-key">Nom</td><td class="pt-kv-val" id="pt-dem-nom">—</td></tr>
+          <tr><td class="pt-kv-key">Service</td><td class="pt-kv-val" id="pt-dem-service">—</td></tr>
+          <tr><td class="pt-kv-key">Poste</td><td class="pt-kv-val" id="pt-dem-poste">—</td></tr>
+          <tr><td class="pt-kv-key">Email</td><td class="pt-kv-val" id="pt-dem-email">—</td></tr>
+        </table>
+      </div>
+      <div class="pt-info-box">
+        <p class="pt-box-label">FOURNISSEUR</p>
+        <table class="pt-kv-table">
+          <tr><td class="pt-kv-key">Société</td><td class="pt-kv-val" id="pt-fou-nom">—</td></tr>
+          <tr><td class="pt-kv-key">Contact</td><td class="pt-kv-val" id="pt-fou-contact">—</td></tr>
+          <tr><td class="pt-kv-key">Email</td><td class="pt-kv-val" id="pt-fou-email">—</td></tr>
+          <tr><td class="pt-kv-key">Tél.</td><td class="pt-kv-val" id="pt-fou-tel">—</td></tr>
+          <tr><td class="pt-kv-key">Adresse</td><td class="pt-kv-val" id="pt-fou-adresse">—</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Tableau articles -->
+    <div class="pt-section">
+      <p class="pt-section-label">DÉTAIL DE LA COMMANDE</p>
+      <table class="pt-items-table" id="pt-items-table">
+        <thead>
+          <tr>
+            <th class="pt-col-num">#</th>
+            <th class="pt-col-designation">Désignation</th>
+            <th class="pt-col-ref">Référence</th>
+            <th class="pt-col-qty">Qté</th>
+            <th class="pt-col-unit">Unité</th>
+            <th class="pt-col-pu">Prix unit. HT</th>
+            <th class="pt-col-tva">TVA %</th>
+            <th class="pt-col-ttc">Montant TTC</th>
+          </tr>
+        </thead>
+        <tbody id="pt-items-body">
+          <!-- Lignes générées dynamiquement -->
+        </tbody>
+      </table>
+      <div class="pt-totals">
+        <div class="pt-totals-row">
+          <span class="pt-totals-label">Total HT</span>
+          <span class="pt-totals-val" id="pt-total-ht">—</span>
+        </div>
+        <div class="pt-totals-row">
+          <span class="pt-totals-label">Total TVA</span>
+          <span class="pt-totals-val" id="pt-total-tva">—</span>
+        </div>
+        <div class="pt-totals-row pt-totals-row--main">
+          <span class="pt-totals-label">Total TTC</span>
+          <span class="pt-totals-val pt-totals-val--main" id="pt-total-ttc">—</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Justification -->
+    <div class="pt-section">
+      <p class="pt-section-label">JUSTIFICATION</p>
+      <div class="pt-justif">
+        <div class="pt-justif__motif">
+          <p class="pt-kv-key">Motif de l'achat</p>
+          <p class="pt-motif-text" id="pt-motif">—</p>
+        </div>
+        <div class="pt-justif__meta">
+          <div class="pt-meta-row" id="pt-row-delai">
+            <span class="pt-kv-key">Délai souhaité</span>
+            <span id="pt-delai">—</span>
+          </div>
+          <div class="pt-meta-row" id="pt-row-cout">
+            <span class="pt-kv-key">Centre de coût</span>
+            <span id="pt-centre-cout">—</span>
+          </div>
+        </div>
+        <div id="pt-row-obs">
+          <p class="pt-kv-key">Observations</p>
+          <p id="pt-observations">—</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Zones de signature -->
+    <div class="pt-sig-grid">
+      <div class="pt-sig-box">
+        <p class="pt-box-label">DEMANDEUR</p>
+        <p class="pt-sig-name" id="pt-sig-dem-nom">&nbsp;</p>
+        <p class="pt-sig-date" id="pt-sig-dem-date">&nbsp;</p>
+        <div class="pt-sig-zone">
+          <span class="pt-sig-zone__label">Signature :</span>
+          <div class="pt-sig-zone__line"></div>
+        </div>
+      </div>
+      <div class="pt-sig-box">
+        <p class="pt-box-label">RESPONSABLE / VALIDATION</p>
+        <p class="pt-sig-name">&nbsp;</p>
+        <p class="pt-sig-date">&nbsp;</p>
+        <div class="pt-sig-zone">
+          <span class="pt-sig-zone__label">Signature :</span>
+          <div class="pt-sig-zone__line"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pied de page -->
+    <div class="pt-footer">
+      <span>Document généré le <span id="pt-generated-date"></span></span>
+      <span id="pt-footer-ref"></span>
+    </div>
+
+  </div>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <!-- Application -->
+  <script src="app.js"></script>
+
+</body>
+</html>
