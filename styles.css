@@ -685,7 +685,6 @@ input, select, textarea { font-family: inherit; }
 
 
 /* ── 14. Utilitaires d'affichage print/screen ──────────────────── */
-.screen-only { display: revert; }
 .print-only  { display: none; }
 
 
