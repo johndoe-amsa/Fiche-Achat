@@ -380,9 +380,12 @@ function populatePrintTemplate() {
 
   // Délai
   const delaiVal = document.getElementById('delai')?.value;
-  const delaiDisplay = delaiVal === 'autres'
-    ? (document.getElementById('delai-autre')?.value.trim() || '—')
-    : 'En stock';
+  let delaiDisplay = '—';
+  if (delaiVal === 'autres') {
+    delaiDisplay = document.getElementById('delai-autre')?.value.trim() || '—';
+  } else if (delaiVal) {
+    delaiDisplay = 'En stock';
+  }
   t('pt-delai', delaiDisplay);
 
   // Port
@@ -391,7 +394,8 @@ function populatePrintTemplate() {
 
   // Adresse
   const adresseEl = document.getElementById('adresse-livraison');
-  t('pt-adresse', adresseEl?.options[adresseEl.selectedIndex]?.text || '—');
+  const adresseText = adresseEl?.value ? adresseEl.options[adresseEl.selectedIndex]?.text : '—';
+  t('pt-adresse', adresseText || '—');
 
   // Tableau articles
   buildPrintItemsTable();

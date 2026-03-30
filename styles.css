@@ -186,7 +186,7 @@ input, select, textarea { font-family: inherit; }
   padding: var(--space-8) var(--space-6) 120px;
   display: flex;
   flex-direction: column;
-  gap: var(--space-8);
+  gap: var(--space-12);
 }
 
 .form-section {
@@ -341,7 +341,7 @@ input, select, textarea { font-family: inherit; }
     transform var(--duration-fast) var(--ease-out);
 }
 
-.btn svg { flex-shrink: 0; }
+.btn svg { flex-shrink: 0; width: 16px; height: 16px; }
 
 .btn:hover  { opacity: 0.85; }
 .btn:active { transform: scale(0.97); }
