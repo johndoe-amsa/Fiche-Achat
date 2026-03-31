@@ -823,8 +823,8 @@ input, select, textarea { font-family: inherit; }
 
   .pt-kv-key {
     color: #666;
-    width: 120px;
-    padding-right: 16px;
+    width: 88px;
+    padding-right: 10px;
     white-space: nowrap;
     font-size: 8pt;
   }
@@ -948,8 +948,8 @@ input, select, textarea { font-family: inherit; }
 
   .pt-cb {
     font-size: 17pt;
-    line-height: 1;
-    vertical-align: middle;
+    display: flex;
+    align-items: center;
   }
 
   .pt-direction__fields,
