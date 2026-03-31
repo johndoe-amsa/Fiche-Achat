@@ -242,9 +242,10 @@ function validateForm() {
 
   // Champs simples obligatoires
   const required = [
-    { id: 'cmd-par',     errId: 'error-cmd-par',     label: 'Le champ "Commandé par"' },
-    { id: 'fournisseur', errId: 'error-fournisseur',  label: 'Le fournisseur' },
-    { id: 'departement', errId: 'error-departement',  label: 'Le département' },
+    { id: 'cmd-par',           errId: 'error-cmd-par',           label: 'Le champ "Commandé par"' },
+    { id: 'fournisseur',       errId: 'error-fournisseur',       label: 'Le fournisseur' },
+    { id: 'departement',       errId: 'error-departement',       label: 'Le département' },
+    { id: 'adresse-livraison', errId: 'error-adresse-livraison', label: "L'adresse de livraison" },
   ];
 
   required.forEach(({ id, errId, label }) => {
