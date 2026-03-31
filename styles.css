@@ -733,12 +733,12 @@ input, select, textarea { font-family: inherit; }
 
   .pt-header__logo {
     flex-shrink: 0;
-    width: 120px;
+    width: 160px;
   }
 
   .pt-logo {
-    max-height: 40px;
-    max-width: 120px;
+    max-height: 56px;
+    max-width: 160px;
     object-fit: contain;
   }
 
@@ -749,7 +749,7 @@ input, select, textarea { font-family: inherit; }
 
   .pt-header__center {
     flex: 1;
-    text-align: center;
+    text-align: right;
   }
 
   .pt-title {
@@ -823,8 +823,8 @@ input, select, textarea { font-family: inherit; }
 
   .pt-kv-key {
     color: #666;
-    width: 60px;
-    padding-right: 8px;
+    width: 88px;
+    padding-right: 10px;
     white-space: nowrap;
     font-size: 8pt;
   }
@@ -894,7 +894,7 @@ input, select, textarea { font-family: inherit; }
     flex-direction: column;
     align-items: flex-end;
     gap: 3px;
-    margin-top: 6px;
+    margin-top: 20px;
   }
 
   .pt-totals-row {
@@ -943,7 +943,13 @@ input, select, textarea { font-family: inherit; }
     font-size: 10pt;
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
+  }
+
+  .pt-cb {
+    font-size: 17pt;
+    display: flex;
+    align-items: center;
   }
 
   .pt-direction__fields,
