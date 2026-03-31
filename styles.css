@@ -64,25 +64,6 @@
   --form-max-width: 960px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-bg:           #000000;
-    --color-bg-secondary: #0A0A0A;
-    --color-bg-tertiary:  #111111;
-
-    --color-text:         #EDEDED;
-    --color-text-muted:   #888888;
-    --color-text-subtle:  #555555;
-
-    --color-border:       #333333;
-    --color-border-strong:#FFFFFF;
-    --color-border-focus: #FFFFFF;
-
-    --backdrop-bg: rgba(0, 0, 0, 0.85);
-    --elevation-1: 0 4px 12px rgba(0, 0, 0, 0.3);
-    --elevation-2: 0 8px 32px rgba(0, 0, 0, 0.5);
-  }
-}
 
 
 /* ── 2. Reset & Base ───────────────────────────────────────────── */
@@ -104,6 +85,9 @@ body {
   background: var(--color-bg);
   min-height: 100vh;
 }
+
+/* Prevent CSS display rules from overriding the hidden attribute */
+[hidden] { display: none !important; }
 
 img { display: block; max-width: 100%; }
 button { font-family: var(--font-sans); }
@@ -301,11 +285,6 @@ input, select, textarea { font-family: inherit; }
   box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
 }
 
-@media (prefers-color-scheme: dark) {
-  .field__input:focus {
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
-  }
-}
 
 .field__input.is-error {
   border-color: var(--color-error);
@@ -362,7 +341,7 @@ input, select, textarea { font-family: inherit; }
     transform var(--duration-fast) var(--ease-out);
 }
 
-.btn svg { flex-shrink: 0; }
+.btn svg { flex-shrink: 0; width: 16px; height: 16px; }
 
 .btn:hover  { opacity: 0.85; }
 .btn:active { transform: scale(0.97); }
@@ -395,8 +374,17 @@ input, select, textarea { font-family: inherit; }
   font-size: 13px;
 }
 
+.btn--sm svg {
+  width: 14px;
+  height: 14px;
+}
+
 .btn-add-row {
   margin-top: var(--space-3);
+}
+
+.article-options {
+  margin-bottom: var(--space-6);
 }
 
 
@@ -697,7 +685,6 @@ input, select, textarea { font-family: inherit; }
 
 
 /* ── 14. Utilitaires d'affichage print/screen ──────────────────── */
-.screen-only { display: revert; }
 .print-only  { display: none; }
 
 

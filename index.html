@@ -71,12 +71,23 @@
           </select>
           <p class="field__error" id="error-departement" role="alert" hidden></p>
         </div>
+      </div>
+    </section>
+
+    <!-- ── Section 2 : Articles à commander ──────────────────────── -->
+    <section class="form-section card" id="section-articles">
+      <div class="section-header">
+        <p class="section-label">Articles</p>
+        <h2 class="section-title">Articles à commander</h2>
+      </div>
+
+      <div class="fields-grid fields-grid--2 article-options">
         <div class="field">
           <label class="field__label" for="offre-num">Selon offre N°</label>
           <input class="field__input" type="text" id="offre-num" name="offre-num"
                  placeholder="N° d'offre">
         </div>
-        <div class="field field--full">
+        <div class="field">
           <span class="field__label" id="prix-label">
             Prix <span class="field__required" aria-hidden="true">*</span>
           </span>
@@ -92,14 +103,6 @@
           </div>
           <p class="field__error" id="error-prix-type" role="alert" hidden></p>
         </div>
-      </div>
-    </section>
-
-    <!-- ── Section 2 : Articles à commander ──────────────────────── -->
-    <section class="form-section card" id="section-articles">
-      <div class="section-header">
-        <p class="section-label">Articles</p>
-        <h2 class="section-title">Articles à commander</h2>
       </div>
 
       <div class="table-wrapper">
@@ -154,6 +157,7 @@
           <label class="field__label" for="delai">Délai</label>
           <div class="select-with-other">
             <select class="field__input field__select" id="delai" name="delai">
+              <option value="">— Sélectionner —</option>
               <option value="en-stock">En stock</option>
               <option value="autres">Autres</option>
             </select>
@@ -197,6 +201,7 @@
         <div class="field">
           <label class="field__label" for="adresse-livraison">Adresse</label>
           <select class="field__input field__select" id="adresse-livraison" name="adresse-livraison">
+            <option value="">— Sélectionner —</option>
             <option value="nj2">Chemin Nicolas-Junker 2, 2740 Moutier</option>
             <option value="nj5">Chemin Nicolas-Junker 5, 2740 Moutier</option>
             <option value="ri95">Rue Industrielle 95, 2740 Moutier</option>
