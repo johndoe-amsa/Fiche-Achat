@@ -150,12 +150,14 @@ input, select, textarea { font-family: inherit; }
 .app-nav__brand {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: var(--space-3);
   min-width: 0;
+  flex: 1;
 }
 
 .app-nav__logo {
-  height: 32px;
+  height: 44px;
   width: auto;
   object-fit: contain;
   flex-shrink: 0;
