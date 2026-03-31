@@ -32,7 +32,6 @@
     <!-- ── Section 1 : Informations de la commande ───────────────── -->
     <section class="form-section card" id="section-commande-info">
       <div class="section-header">
-        <p class="section-label">Commande</p>
         <h2 class="section-title">Informations de la commande</h2>
       </div>
       <div class="fields-grid fields-grid--2">
@@ -67,7 +66,6 @@
     <!-- ── Section 2 : Articles à commander ──────────────────────── -->
     <section class="form-section card" id="section-articles">
       <div class="section-header">
-        <p class="section-label">Articles</p>
         <h2 class="section-title">Articles à commander</h2>
       </div>
 
@@ -184,18 +182,19 @@
     <!-- ── Section 3 : Adresse de livraison ──────────────────────── -->
     <section class="form-section card" id="section-adresse">
       <div class="section-header">
-        <p class="section-label">Livraison</p>
         <h2 class="section-title">Adresse de livraison</h2>
       </div>
       <div class="fields-grid fields-grid--1">
         <div class="field">
           <label class="field__label" for="adresse-livraison">Adresse</label>
-          <select class="field__input field__select" id="adresse-livraison" name="adresse-livraison">
+          <select class="field__input field__select" id="adresse-livraison" name="adresse-livraison" required>
             <option value="">— Sélectionner —</option>
+            <option value="aucune">Aucune</option>
             <option value="nj2">Chemin Nicolas-Junker 2, 2740 Moutier</option>
             <option value="nj5">Chemin Nicolas-Junker 5, 2740 Moutier</option>
             <option value="ri95">Rue Industrielle 95, 2740 Moutier</option>
           </select>
+          <p class="field__error" id="error-adresse-livraison" role="alert" hidden></p>
         </div>
       </div>
     </section>
