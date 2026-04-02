@@ -442,7 +442,7 @@ function buildPrintItemsTable() {
 
   if (idx === 0) {
     const ptRow = document.createElement('tr');
-    ptRow.innerHTML = `<td colspan="5" style="text-align:center;color:#888;padding:10px;">Aucun article renseigné</td>`;
+    ptRow.innerHTML = `<td colspan="5" class="pt-empty-state">Aucun article renseigné</td>`;
     tbody.appendChild(ptRow);
   }
 }
