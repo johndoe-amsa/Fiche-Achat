@@ -1,5 +1,5 @@
 ---
-name: flo-design-system-v3
+name: flo-design-system-v4
 description: >
   Charte graphique personnalisée de Flo. DOIT être utilisé pour TOUTE génération
   ou audit de HTML/CSS : pages, composants UI, dashboards, data-viz, formulaires,
@@ -8,7 +8,7 @@ description: >
   ou charte graphique — même sans mention explicite par l'utilisateur.
 ---
 
-# Charte Graphique & Standards UI — Flo Design System v3
+# Charte Graphique & Standards UI — Flo Design System v4
 
 ## Modes d'utilisation
 
@@ -27,6 +27,14 @@ Quand l'utilisateur fournit du code existant à vérifier :
 2. Parcourir le code et lister chaque violation en citant la règle enfreinte
 3. Proposer le code corrigé pour chaque violation
 4. Structurer le retour : `❌ Violation` → `Règle` → `✅ Correction`
+
+### Règle de contraste contextuel
+Avant de signaler un token "incorrect", vérifier le contexte d'imbrication :
+un composant peut légitimement dévier du token de référence si ce token
+crée une collision visuelle avec son conteneur parent.
+Exemple : `field__input` dans une `.card` doit contraster avec
+`--color-bg-secondary` (fond de la carte) → `var(--color-bg)` est correct.
+Signaler comme **NOTE** plutôt que **VIOLATION** dans ce cas.
 
 ---
 
@@ -126,7 +134,7 @@ Tout fichier HTML généré DOIT inclure ce bloc `:root` complet :
   --color-bg-secondary: #FAFAFA;
   --color-bg-tertiary:  #F2F2F2;
 
-  --color-text:         #000000;
+  --color-text:         #111111;
   --color-text-muted:   #666666;
   --color-text-subtle:  #999999;
 
@@ -134,8 +142,12 @@ Tout fichier HTML généré DOIT inclure ce bloc `:root` complet :
   --color-border-strong:#000000;
   --color-border-focus: #000000;
 
+  /* Couleur d'accent (bouton primaire, lien actif, highlight) */
+  --color-accent:       #000000;
+  --color-accent-text:  #FFFFFF;
+
   /* Couleurs Sémantiques — JAMAIS décoratives */
-  --color-success:      #0070F3;
+  --color-success:      #16A34A;
   --color-error:        #EE0000;
   --color-warning:      #F5A623;
 
@@ -152,6 +164,15 @@ Tout fichier HTML généré DOIT inclure ce bloc `:root` complet :
   /* Typographie */
   --font-sans:   'Geist', system-ui, -apple-system, sans-serif;
   --font-mono:   'Geist Mono', Menlo, monospace;
+
+  /* Échelle typographique (tokens CSS — ne pas hardcoder les valeurs) */
+  --text-h1-size:    42px; --text-h1-weight: 700; --text-h1-lh: 1.1; --text-h1-ls: -0.04em;
+  --text-h2-size:    28px; --text-h2-weight: 600; --text-h2-lh: 1.2; --text-h2-ls: -0.03em;
+  --text-h3-size:    20px; --text-h3-weight: 600; --text-h3-lh: 1.3; --text-h3-ls: -0.02em;
+  --text-body-size:  16px; --text-body-weight: 400; --text-body-lh: 1.5;
+  --text-small-size: 14px; --text-small-weight: 400; --text-small-lh: 1.5;
+  --text-label-size: 12px; --text-label-weight: 500; --text-label-lh: 1; --text-label-ls: 0.05em;
+  --text-code-size:  13px; --text-code-weight: 400; --text-code-lh: 1.6;
 
   /* Espacement (base 8px) */
   --space-1:  4px;
@@ -184,6 +205,12 @@ Tout fichier HTML généré DOIT inclure ce bloc `:root` complet :
   --duration-slow:   300ms;
   --ease-out:        cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out:     cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Z-Index (couches EXCLUSIVEMENT — ne jamais utiliser de valeur arbitraire) */
+  --z-dropdown:  100;
+  --z-modal:     200;
+  --z-toast:     300;
+  --z-tooltip:   400;
 }
 
 /*
@@ -191,9 +218,16 @@ Tout fichier HTML généré DOIT inclure ce bloc `:root` complet :
  * Deux blocs nécessaires (CSS ne permet pas de combiner media query + sélecteur attribut) :
  *   1. @media prefers-color-scheme → préférence système (sauf override light)
  *   2. [data-theme="dark"]        → toggle manuel
- * ⚠ Garder les deux synchronisés — toujours modifier les deux simultanément.
+ * ⚠ Garder les deux synchronisés — modifier les deux simultanément.
+ *
+ * Tokens modifiés en dark : bg, text, border, backdrop-bg, elevation, data-*, accent.
+ * Les tokens typo, espacement, radius, z-index et transitions sont invariants.
  */
+
+/* [dark tokens — à dupliquer dans les deux blocs ci-dessous] */
 @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --color-accent:       #EDEDED;
+  --color-accent-text:  #000000;
   --color-bg:           #000000;
   --color-bg-secondary: #0A0A0A;
   --color-bg-tertiary:  #111111;
@@ -212,6 +246,8 @@ Tout fichier HTML généré DOIT inclure ce bloc `:root` complet :
 }}
 
 :root[data-theme="dark"] {
+  --color-accent:       #EDEDED;
+  --color-accent-text:  #000000;
   --color-bg:           #000000;
   --color-bg-secondary: #0A0A0A;
   --color-bg-tertiary:  #111111;
@@ -235,6 +271,7 @@ Tout fichier HTML généré DOIT inclure ce bloc `:root` complet :
 ## Palette — Règles Strictes
 
 - L'interface est **monochrome**. Noir, blanc, gris uniquement.
+- **Bouton primaire / lien actif / highlight :** utiliser `--color-accent` (jamais une couleur data ou sémantique).
 - Les couleurs sémantiques (`success`, `error`, `warning`) sont réservées aux états fonctionnels. **Jamais décoratives.**
 - Les couleurs `--color-data-*` sont **exclusivement** pour les graphiques (SVG, Canvas, charts). Jamais pour des boutons, badges, textes d'interface, ou fonds de layout.
 - La couleur seule ne doit **jamais** être le seul vecteur d'information — toujours doubler d'une icône ou d'un texte.
@@ -249,15 +286,17 @@ Tout fichier HTML généré DOIT inclure ce bloc `:root` complet :
 
 ### Échelle Typographique
 
-| Rôle | Taille | Weight | Line-height | Letter-spacing | Casse |
+Tous les rôles sont disponibles en tokens CSS (dans le `:root`) — toujours les utiliser, ne jamais hardcoder :
+
+| Rôle | Token size | Weight | Line-height | Letter-spacing | Casse |
 |---|---|---|---|---|---|
-| Titre App (H1) | 36–48px | 700 | 1.1 | −0.04em | Titre |
-| Titre Section (H2) | 24–32px | 600 | 1.2 | −0.03em | Titre |
-| Titre Carte (H3) | 18–20px | 600 | 1.3 | −0.02em | Titre |
-| Corps (défaut) | 16px | 400 | 1.5 | 0 | Normal |
-| Corps (dense) | 14px | 400 | 1.5 | 0 | Normal |
-| Label / Surtitre | 12px | 500 | 1 | +0.05em | UPPERCASE |
-| Code inline | 13px | 400 | 1.6 | 0 | Normal |
+| Titre App (H1) | `--text-h1-size` (42px) | 700 | 1.1 | −0.04em | Titre |
+| Titre Section (H2) | `--text-h2-size` (28px) | 600 | 1.2 | −0.03em | Titre |
+| Titre Carte (H3) | `--text-h3-size` (20px) | 600 | 1.3 | −0.02em | Titre |
+| Corps (défaut) | `--text-body-size` (16px) | 400 | 1.5 | 0 | Normal |
+| Corps (dense) | `--text-small-size` (14px) | 400 | 1.5 | 0 | Normal |
+| Label / Surtitre | `--text-label-size` (12px) | 500 | 1 | +0.05em | UPPERCASE |
+| Code inline | `--text-code-size` (13px) | 400 | 1.6 | 0 | Normal |
 
 ### Règles typo strictes
 - **Jamais** de texte en dessous de 12px.
@@ -366,3 +405,4 @@ Ces règles ne sont **jamais** négociables :
 - Plus de 3 poids de fonte
 - Classes Tailwind mélangées avec du CSS custom pour les mêmes propriétés
 - Supprimer `outline` sans `:focus-visible`
+- Valeurs `z-index` arbitraires — toujours utiliser `var(--z-dropdown/modal/toast/tooltip)`
