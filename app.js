@@ -195,8 +195,7 @@ function removeItemRow(tr) {
     recalcTotals();
     return;
   }
-  tr.style.opacity = '0';
-  tr.style.transition = 'opacity 150ms ease-out';
+  tr.classList.add('row-exit');
   setTimeout(() => {
     tr.remove();
     renumberRows();
