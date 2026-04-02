@@ -97,10 +97,15 @@
   font-weight: 500;
   color:       var(--color-text-muted);
 }
+/*
+ * Fond de l'input — valeur RELATIVE au conteneur parent :
+ *   - Input sur fond de page (--color-bg) → légèrement teinté pour ressortir
+ *   - Input dans une carte (--color-bg-secondary) → blanc pur pour contraster
+ */
 .field__input {
   height:        40px;
   padding:       0 var(--space-3);
-  background:    var(--color-bg-secondary);
+  background:    var(--color-bg-secondary);  /* contexte par défaut : fond de page */
   border:        1px solid var(--color-border);
   border-radius: var(--radius-md);
   font-size:     14px;
@@ -118,6 +123,9 @@
 
 .field__input.is-error { border-color: var(--color-error); box-shadow: 0 0 0 3px rgba(238,0,0,0.1); }
 .field__input:disabled { opacity: 0.5; cursor: not-allowed; background: var(--color-bg-tertiary); }
+
+/* Input dans une carte → contraster avec --color-bg-secondary (fond de la carte) */
+.card .field__input { background: var(--color-bg); }
 
 .field__error {
   font-size: 12px;
