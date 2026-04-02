@@ -10,7 +10,7 @@
   --color-bg-secondary: #FAFAFA;
   --color-bg-tertiary:  #F2F2F2;
 
-  --color-text:         #000000;
+  --color-text:         #111111;
   --color-text-muted:   #666666;
   --color-text-subtle:  #999999;
 
@@ -29,7 +29,7 @@
   --color-data-grid: var(--color-border);
 
   /* Sémantiques */
-  --color-success: #0070F3;
+  --color-success: #16A34A;
   --color-error:   #EE0000;
   --color-warning: #F5A623;
 
@@ -72,6 +72,26 @@
   /* Layout */
   --nav-height: 64px;
   --form-max-width: 960px;
+
+  /* Accent */
+  --color-accent:      #000000;
+  --color-accent-text: #FFFFFF;
+
+  /* Typographie — Échelle */
+  --text-h1-size: 42px; --text-h1-weight: 700; --text-h1-lh: 1.1; --text-h1-ls: -0.04em;
+  --text-h2-size: 28px; --text-h2-weight: 600; --text-h2-lh: 1.2; --text-h2-ls: -0.03em;
+  --text-h3-size: 20px; --text-h3-weight: 600; --text-h3-lh: 1.3; --text-h3-ls: -0.02em;
+  --text-body-size:  16px; --text-body-weight:  400; --text-body-lh:  1.5;
+  --text-small-size: 14px; --text-small-weight: 400; --text-small-lh: 1.5;
+  --text-label-size: 12px; --text-label-weight: 500; --text-label-lh: 1; --text-label-ls: 0.05em;
+  --text-code-size:  13px; --text-code-weight:  400; --text-code-lh:  1.6;
+
+  /* Z-Index (couches EXCLUSIVEMENT) */
+  --z-actionbar: 90;
+  --z-dropdown:  100;
+  --z-modal:     200;
+  --z-toast:     300;
+  --z-tooltip:   400;
 }
 
 
@@ -138,7 +158,7 @@ input, select, textarea { font-family: inherit; }
 .app-nav {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: var(--z-dropdown);
   height: var(--nav-height);
   background: var(--backdrop-bg);
   backdrop-filter: var(--backdrop);
@@ -227,19 +247,21 @@ input, select, textarea { font-family: inherit; }
 }
 
 .section-label {
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.05em;
+  font-size:      var(--text-label-size);
+  font-weight:    var(--text-label-weight);
+  letter-spacing: var(--text-label-ls);
+  line-height:    var(--text-label-lh);
   text-transform: uppercase;
-  color: var(--color-text-muted);
-  margin-bottom: var(--space-1);
+  color:          var(--color-text-muted);
+  margin-bottom:  var(--space-1);
 }
 
 .section-title {
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: var(--color-text);
+  font-size:      var(--text-h3-size);
+  font-weight:    var(--text-h3-weight);
+  letter-spacing: var(--text-h3-ls);
+  line-height:    var(--text-h3-lh);
+  color:          var(--color-text);
 }
 
 .section-hint {
@@ -269,9 +291,9 @@ input, select, textarea { font-family: inherit; }
 }
 
 .field__label {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--color-text-muted);
+  font-size:   var(--text-label-size);
+  font-weight: var(--text-label-weight);
+  color:       var(--color-text-muted);
 }
 
 .field__required {
@@ -637,7 +659,7 @@ input, select, textarea { font-family: inherit; }
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 90;
+  z-index: var(--z-actionbar);
   background: var(--backdrop-bg);
   backdrop-filter: var(--backdrop);
   -webkit-backdrop-filter: var(--backdrop);
@@ -943,6 +965,12 @@ input, select, textarea { font-family: inherit; }
   .pt-totals-val--main {
     font-size: 11pt;
     font-weight: 700;
+  }
+
+  .pt-empty-state {
+    text-align: center;
+    color: var(--color-text-subtle);
+    padding: var(--space-3);
   }
 
   /* Section direction & livraison (print-only) */
